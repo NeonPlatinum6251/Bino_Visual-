@@ -28,7 +28,7 @@ def sigma(X,sigmasums): #this is going to be used in the equation for working ou
 
     return sigmasums
 
-def binocd(N,X,P): # doin' tha maff
+def binocd(N,X,P): # doin' tha maff  
 
     colourstrength=   #I will store the answer of the binomial as the colour strength
 
