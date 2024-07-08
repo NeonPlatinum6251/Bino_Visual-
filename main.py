@@ -1,7 +1,7 @@
 import turtle
 
-sigmasums =float(0.0)
-X= float(0.0)
+sigmasums =0.0
+X= 0.0
 P = [0.05, 0.10, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]
 N = int(input("Enter the number of trials: "))  # gets the N for the equation
 
@@ -28,8 +28,7 @@ def sigma(X, sigmasums,equation,N,P):  # this is going to be used in the equatio
 def equation(N,i,P): #stupid fucking function
     return binocd(N,i,P[i%len(P)])
 
-result = sigma(int(X),sigmasums,equation,N,P)
-# this is just to test the maths
 howtafindX(N,P)
+result = sigma(X,sigmasums,equation,N,P)
 print(result)
 print(X)
