@@ -1,3 +1,4 @@
+
 import math
 import turtle
 
@@ -18,28 +19,66 @@ def howtafindX(N,P):  # this finds how many successes we can have before it is g
         if any(prob >= 1 for prob in probab):
             break
         count += 1
-        
+
     return count
 
 # Captial sigma (Σ) applies the expression after it to all members of a range and then sums the results. VERY IMPORTANT NEED TO REMEMBER
 
-def sigma(X, sigmasums,equation,N,P):  # this is going to be used in the equation for working out the probability
+def sigma(X, sigmasums, equation, N, P):  # this is going to be used in the equation for working out the probability
     for i in range(0, X + 1):
-        sigmasums += equation(N,i,P)
+        sigmasums += equation(N, i, P)
     return sigmasums
 
 
 def equation(N,i,P): #stupid fucking function
     return binocd(N,i,P[i%len(P)])
 
-def turtle_init():
+def calcprobs(N, P):
+    probabilities = []
+    for p in P:
+        X = howtafindX(N,[p]) #x for each probability
+        result = sigma(X, 0, equation, N, [p])
+        probabilities.append(result)
+    return probabilities
+
+#chooses which colour to use
+def colours(probability):
+    if probability <= 0.2:
+        return "red"
+    elif probability <= 0.5:
+        return "orange"
+    elif probability <= 0.8:
+        return "yellow"
+    else:
+        return "green"
+ # sets up the turtle screen and draws the stuff   
+def drawresults(probabilities):
+    screen= turtle.Screen()
+    screen.setup(width=600, height=400)
+    screen.bgcolor("white")
+    turtle.speed(0)
     
+    square_size = 30
+    space = 50
+    yposition = 0
 
-
-
-
+    for i, probability in enumerate(probabilities):
+        colour=colours(probability)
+        turtle.penup()
+        turtle.goto(-300+ i * space, yposition)
+        turtle.pendown()
+        turtle.fillcolor(colour)
+        turtle.begin_fill()
+        for _ in range(4):
+            turtle.forward(square_size)
+            turtle.left(90)
+        turtle.end_fill()
+    turtle.hideturtle()
+    turtle.done()    
+    
 X=howtafindX(N,P)
 result = sigma(X,sigmasums,equation,N,P)
 print(result)
 print(X)
 
+drawresults(probability)
